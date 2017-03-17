@@ -19,7 +19,7 @@ class WinesController < ApplicationController
       @wine.winery = Winery.first
     else
       @wine.winery = Winery.find(params[:winery_id])
-    end 
+    end
     @wineries_for_select = Winery.all.map do |winery|
       [winery.name, winery.id]
 
@@ -41,7 +41,7 @@ class WinesController < ApplicationController
 
     respond_to do |format|
       if @wine.save
-        format.html { redirect_to @wine, notice: 'Wine was successfully created.' }
+        format.html { redirect_to @wine, notice: 'Wine was successfully AUTOMATICALLY.' }
         format.json { render :show, status: :created, location: @wine }
       else
         format.html { render :new }

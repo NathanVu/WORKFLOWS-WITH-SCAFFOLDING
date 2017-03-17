@@ -1,0 +1,69 @@
+//Place all the behaviors and hooks related to the matching controller here.
+// All this logic will automatically be available in application.js.
+// You can use CoffeeScript in this file: http://coffeescript.org/
+
+$(document).ready(function() {
+  $("#new_wine_button").on("click", function () {
+    newWine = {
+      "wine" : {
+        "name" : "Boxed",
+        "vintage" : 1111,
+        "description" : "It's p cool",
+        "winery_id" : 2
+      }
+    }
+
+    $.ajax({
+      dataType:'json',
+      url:'/wines',
+      method:'POST',
+      data:newWine,
+      success:function(data){
+        add_wine_to_list(data, data.winery_id)
+      }
+      error:function(jqHXR, textStatus, errorThrown){
+        alert("Dog ur shit SUX " +errorThrown)
+      }
+
+    })
+  })
+})
+
+function add_wine_to_list(data, winery, callBack){
+
+      var w = winery;
+      $.ajax({
+        dataType: 'json',
+        url:'/wineries',
+        method:'GET',
+        success:function(dFS){
+          dFS.forEach(function(e){
+            if(parseInt(e.id)==parseInt(data.winery_id)){
+              alert(e.id + "e.id and " + data.winery_id + "newWine.id");
+              w=e.name;
+            }
+          })
+          return callBack(data, w);
+        },
+        error:function() {
+          alert("SNOOZE U LOOZE");
+        }
+      });
+    alert(winery)
+    $("tbody").append(add_wine_to_list_html(data, winery))
+}
+
+function add_wine_to_list_html(wine, winery) {
+  var str = "<tr><td>";
+  str+=wine.name + "</td><td>";
+  str+=wine.vintage + "</td><td>";
+  str+=wine.description + "</td><td>";
+  str+=winery + "</td>";
+  return str;
+}
+
+$(function() {
+  add_wine_to_list(function(data, w, function(data, w)){
+    w = d;
+  })
+})

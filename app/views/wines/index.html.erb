@@ -20,9 +20,9 @@
         <td><%= wine.vintage %></td>
         <td><%= wine.description %></td>
         <td><%= wine.winery.name %></td>
-        <td><%= link_to 'Show', wine %></td>
-        <td><%= link_to 'Edit', edit_wine_path(wine) %></td>
-        <td><%= link_to 'Destroy', wine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Show', wine %></td>
+          <td><%= link_to 'Edit', edit_wine_path(wine) %></td>
+          <td><%= link_to 'Destroy', wine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +30,5 @@
 
 <br>
 
-<%= link_to 'New Wine', new_wine_path %>
+<!--link_to 'New Wine', new_wine_path -->
+<%= render 'form', :wine => Wine.new, :wineries_for_select => Winery.all.map { |winery| [winery.name, winery.id] } %>
